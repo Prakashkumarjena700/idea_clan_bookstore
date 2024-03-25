@@ -6,14 +6,16 @@ module.exports = gql`
     description: String
     createdAt: String
     author:String,
-    owner:String
+    owner:String,
+    price: String
   }
 
   input BookInput {
     name: String
     description: String
     author:String,
-    owner:String
+    owner:String,
+    price: String
   }
 
   type User {

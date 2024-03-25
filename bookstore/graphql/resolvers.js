@@ -20,12 +20,13 @@ module.exports = {
         }
     },
     Mutation: {
-        async createBook(_, { BookInput: { name, description ,author,owner} }) {
+        async createBook(_, { BookInput: { name, description, author, owner, price } }) {
             const createdBook = new Book({
                 name,
                 description,
                 author,
                 owner,
+                price,
                 createdAt: new Date().toISOString(),
             })
 
@@ -40,8 +41,8 @@ module.exports = {
             const wasDeleted = (await Book.deleteOne({ _id: ID })).deletedCount;
             return wasDeleted;
         },
-        async editBook(_, { ID, BookInput: { name, description } }) {
-            const wasEdited = (await Book.updateOne({ _id: ID }, { name: name, description: description })).modifiedCount;
+        async editBook(_, { ID, BookInput: { name, description, author,owner,price } }) {
+            const wasEdited = (await Book.updateOne({ _id: ID }, { name: name, description: description, author: author, owner: owner, price: price })).modifiedCount;
             return wasEdited;
         },
         async register(_, { UserInput: { name, email, password, role } }) {
@@ -104,7 +105,7 @@ module.exports = {
             const wasEdited = (await User.updateOne({ _id: ID }, { name: name, email: email, role: role })).modifiedCount;
             return wasEdited;
         },
-        async deleteUser(_,{ID}){
+        async deleteUser(_, { ID }) {
             const wasDeleted = (await User.deleteOne({ _id: ID })).deletedCount;
             return wasDeleted;
         }
